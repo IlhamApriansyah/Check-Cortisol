@@ -1,0 +1,86 @@
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+input[type="range"] {
+    height: 10px;
+    background: linear-gradient(to right, #0d9488 var(--tw-gradient-stops), #e2e8f0);
+    border-radius: 9999px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    background: #0d9488;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+button:focus {
+    outline: 2px solid #0d9488;
+    outline-offset: 2px;
+}
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    /* Add your custom styles below this line */
+
+.dark {
+    --bg-primary:    #020617;        /* slate-950 — sangat gelap */
+    --bg-secondary:  #0f172a;        /* slate-900 */
+    --bg-card:       #0f172a;        /* slate-900 untuk card */
+    --text-primary:  #e2e8f0;        /* slate-200 — teks terang tapi tidak putih menyilaukan */
+    --text-secondary:#94a3b8;        /* slate-400 — sekunder lebih redup */
+    --border:        #1e293b;        /* slate-800 */
+    --shadow:        0 10px 25px -5px rgba(0,0,0,0.6);   /* bayangan lebih dalam */
+
+    --teal-dark:     #0f766e;        /* teal-800 */
+    --teal-darker:   #0c5c57;        /* lebih gelap lagi */
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .bg-teal-600,
+.dark [class*="bg-teal-600"] {
+    background-color: var(--teal-dark) !important;
+}
+
+.dark .bg-gradient-to-br.from-teal-700.to-cyan-600 {
+    background: linear-gradient(to bottom right, #0c5c57, #0e7490) !important;
+}
+
+.dark .bg-teal-600 {
+    background-color: #115e59 !important;  /* teal-900 */
+}
+
+.dark .bg-teal-600:hover {
+    background-color: #0c5c57 !important;  /* lebih gelap saat hover */
+}
+
+.dark #result-modal > div {
+    background-color: #0f172a !important;
+    border: 1px solid #1e293b;
+}
+
+.dark nav {
+    background-color: #020617 !important;
+    border-bottom-color: #1e293b !important;
+}

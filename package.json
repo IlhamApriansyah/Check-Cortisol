@@ -1,0 +1,11 @@
+{
+  "name": "check-cortisol",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "npx tailwindcss -c tailwind.config.js -i ./src/theme.css -o ./src/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

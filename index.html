@@ -1,250 +1,532 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Kortisol</title>
-    <link rel="stylesheet" href="src/output.css">
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased">
-
-<nav class="bg-white shadow-sm border-b sticky top-0 z-10 dark:bg-gray-900 dark:border-gray-800 dark:shadow-gray-950/30 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">K</div>
-            <span class="text-2xl font-semibold text-teal-700 dark:text-teal-400">Kortisol</span>
-        </div>
-
-        <div class="flex items-center gap-4 md:gap-8">
-            <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-slate-100 dark:hover:bg-gray-800 transition" aria-label="Buka menu">
-                <svg class="w-7 h-7 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#home"  class="hover:text-teal-600 dark:hover:text-teal-400 transition">Beranda</a>
-                <a href="#info"  class="hover:text-teal-600 dark:hover:text-teal-400 transition">Informasi</a>
-                <a href="#tips"  class="hover:text-teal-600 dark:hover:text-teal-400 transition">Tips</a>
-            </div>
-            <!-- Tombol Dark Mode -->
-            <button id="theme-toggle" type="button" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-gray-800 transition" aria-label="Toggle dark mode">
-                <!-- Icon Sun (light mode) -->
-                <svg id="sun-icon" class="w-6 h-6 text-slate-700 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-                <!-- Icon Moon (dark mode) -->
-                <svg id="moon-icon" class="w-6 h-6 text-slate-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-black/60 z-40 hidden">
-        <div class="absolute top-0 right-0 w-72 max-w-[90vw] h-full bg-white dark:bg-gray-900 shadow-xl p-8 flex flex-col gap-8">
-            <button id="mobile-menu-close" class="self-end text-2xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200" aria-label="Tutup menu">&times;</button>
-            <a href="#home"  class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition">Beranda</a>
-            <a href="#info"  class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition">Informasi</a>
-            <a href="#tips"  class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition">Tips</a>
-        </div>
-    </div>
-</nav>
-
-    <!-- Hero -->
-    <section id="home" class="bg-gradient-to-br from-teal-700 to-cyan-600 text-white py-28">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">Cek Kadar Kortisol<br>di Tubuh Anda</h1>
-            <p class="text-base sm:text-xl max-w-3xl mx-auto opacity-90 mb-10">Estimasi berbasis gejala dan gaya hidup – hasil instan & edukatif.</p>
-            <a href="#checker" class="inline-block bg-white text-teal-700 px-6 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition">Mulai Pemeriksaan</a>
-        </div>
-    </section>
-
-    <!-- Informasi Kortisol -->
-    <section id="info" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Apa Itu Kortisol?</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-                <div class="space-y-6 text-lg">
-                    <p>Kortisol adalah hormon stres utama yang diproduksi oleh kelenjar adrenal. Hormon ini mengatur metabolisme, respons imun, tekanan darah, dan adaptasi tubuh terhadap stres.</p>
-                    <p>Kadar kortisol biasanya tertinggi di pagi hari dan menurun secara bertahap hingga malam hari.</p>
-                </div>
-                <div class="bg-slate-100 p-8 rounded-3xl">
-                    <h3 class="font-semibold text-lg mb-4">Rentang Referensi Normal (tes darah pagi 07.00–09.00)</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between border-b pb-3">
-                            <span class="font-medium">μg/dL</span>
-                            <span class="font-semibold text-teal-700">5 – 25</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="font-medium">nmol/L</span>
-                            <span class="font-semibold text-teal-700">138 – 690</span>
-                        </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Check Kortisol</title>
+        <link rel="stylesheet" href="src/theme.css" />
+    </head>
+    <body class="bg-slate-50 text-slate-800 antialiased">
+        <nav
+            class="bg-white shadow-sm border-b sticky top-0 z-10 dark:bg-gray-900 dark:border-gray-800 dark:shadow-gray-950/30 transition-colors duration-300"
+        >
+            <div
+                class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center"
+            >
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl"
+                    >
+                        K
                     </div>
-                    <p class="text-xs text-slate-500 mt-6">*Nilai referensi dapat bervariasi antar laboratorium. Gunakan rentang dari laporan laboratorium Anda.</p>
+                    <span
+                        class="text-2xl font-semibold text-teal-700 dark:text-teal-400"
+                        >Kortisol</span
+                    >
+                </div>
+
+                <div class="flex items-center gap-4 md:gap-8">
+                    <button
+                        id="mobile-menu-toggle"
+                        class="md:hidden p-2 rounded-full hover:bg-slate-100 dark:hover:bg-gray-800 transition"
+                        aria-label="Buka menu"
+                    >
+                        <svg
+                            class="w-7 h-7 text-slate-700 dark:text-slate-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                    </button>
+                    <div class="hidden md:flex gap-8 text-sm font-medium">
+                        <a
+                            href="#home"
+                            class="hover:text-teal-600 dark:hover:text-teal-400 transition"
+                            >Beranda</a
+                        >
+                        <a
+                            href="#info"
+                            class="hover:text-teal-600 dark:hover:text-teal-400 transition"
+                            >Informasi</a
+                        >
+                        <a
+                            href="#tips"
+                            class="hover:text-teal-600 dark:hover:text-teal-400 transition"
+                            >Tips</a
+                        >
+                    </div>
+                    <!-- Tombol Dark Mode -->
+                    <button
+                        id="theme-toggle"
+                        type="button"
+                        class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-gray-800 transition"
+                        aria-label="Toggle dark mode"
+                    >
+                        <!-- Icon Sun (light mode) -->
+                        <svg
+                            id="sun-icon"
+                            class="w-6 h-6 text-slate-700 dark:hidden"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                            ></path>
+                        </svg>
+                        <!-- Icon Moon (dark mode) -->
+                        <svg
+                            id="moon-icon"
+                            class="w-6 h-6 text-slate-300 hidden dark:block"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                            ></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </div>
-    </section>
+            <!-- Mobile menu -->
+            <div
+                id="mobile-menu"
+                class="md:hidden fixed inset-0 bg-black/60 z-40 hidden"
+            >
+                <div
+                    class="absolute top-0 right-0 w-72 max-w-[90vw] h-full bg-white dark:bg-gray-900 shadow-xl p-8 flex flex-col gap-8"
+                >
+                    <button
+                        id="mobile-menu-close"
+                        class="self-end text-2xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                        aria-label="Tutup menu"
+                    >
+                        &times;
+                    </button>
+                    <a
+                        href="#home"
+                        class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition"
+                        >Beranda</a
+                    >
+                    <a
+                        href="#info"
+                        class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition"
+                        >Informasi</a
+                    >
+                    <a
+                        href="#tips"
+                        class="text-lg font-medium hover:text-teal-600 dark:hover:text-teal-400 transition"
+                        >Tips</a
+                    >
+                </div>
+            </div>
+        </nav>
 
-    <!-- Estimator -->
-    <section id="checker" class="py-20 bg-slate-100">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="bg-white rounded-3xl shadow-xl p-10">
-                <h2 class="text-3xl font-bold text-center mb-2">Estimator Kadar Kortisol</h2>
-                <p class="text-center text-slate-500 mb-10">Isi data dengan jujur untuk estimasi yang lebih akurat</p>
+        <!-- Hero -->
+        <section
+            id="home"
+            class="bg-gradient-to-br from-teal-700 to-cyan-600 text-white py-28"
+        >
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h1
+                    class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight"
+                >
+                    Cek Kadar Kortisol<br />di Tubuh Anda
+                </h1>
+                <p
+                    class="text-base sm:text-xl max-w-3xl mx-auto opacity-90 mb-10"
+                >
+                    Estimasi berbasis gejala dan gaya hidup – hasil instan &
+                    edukatif.
+                </p>
+                <a
+                    href="#checker"
+                    class="inline-block bg-white text-teal-700 px-6 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition"
+                    >Mulai Pemeriksaan</a
+                >
+            </div>
+        </section>
 
-                <form id="cortisol-form" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Usia (tahun)</label>
-                            <input type="number" id="age" value="35" min="18" max="100" required
-                                   class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200">
+        <!-- Informasi Kortisol -->
+        <section id="info" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Apa Itu Kortisol?
+                </h2>
+                <div
+                    class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto"
+                >
+                    <div class="space-y-6 text-lg">
+                        <p>
+                            Kortisol adalah hormon stres utama yang diproduksi
+                            oleh kelenjar adrenal. Hormon ini mengatur
+                            metabolisme, respons imun, tekanan darah, dan
+                            adaptasi tubuh terhadap stres.
+                        </p>
+                        <p>
+                            Kadar kortisol biasanya tertinggi di pagi hari dan
+                            menurun secara bertahap hingga malam hari.
+                        </p>
+                    </div>
+                    <div class="bg-slate-100 p-8 rounded-3xl">
+                        <h3 class="font-semibold text-lg mb-4">
+                            Rentang Referensi Normal (tes darah pagi
+                            07.00–09.00)
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between border-b pb-3">
+                                <span class="font-medium">μg/dL</span>
+                                <span class="font-semibold text-teal-700"
+                                    >5 – 25</span
+                                >
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">nmol/L</span>
+                                <span class="font-semibold text-teal-700"
+                                    >138 – 690</span
+                                >
+                            </div>
                         </div>
+                        <p class="text-xs text-slate-500 mt-6">
+                            *Nilai referensi dapat bervariasi antar
+                            laboratorium. Gunakan rentang dari laporan
+                            laboratorium Anda.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estimator -->
+        <section id="checker" class="py-20 bg-slate-100">
+            <div class="max-w-3xl mx-auto px-4">
+                <div class="bg-white rounded-3xl shadow-xl p-10">
+                    <h2 class="text-3xl font-bold text-center mb-2">
+                        Estimator Kadar Kortisol
+                    </h2>
+                    <p class="text-center text-slate-500 mb-10">
+                        Isi data dengan jujur untuk estimasi yang lebih akurat
+                    </p>
+
+                    <form id="cortisol-form" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2"
+                                    >Usia (tahun)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="age"
+                                    value="35"
+                                    min="18"
+                                    max="100"
+                                    required
+                                    class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2"
+                                    >Jenis Kelamin</label
+                                >
+                                <div class="flex gap-8 pt-3">
+                                    <label
+                                        class="flex items-center gap-2 cursor-pointer"
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="male"
+                                            checked
+                                            class="accent-teal-600"
+                                        />
+                                        <span>Laki-laki</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 cursor-pointer"
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="female"
+                                            class="accent-teal-600"
+                                        />
+                                        <span>Perempuan</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-sm font-medium mb-2">Jenis Kelamin</label>
-                            <div class="flex gap-8 pt-3">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="gender" value="male" checked class="accent-teal-600">
-                                    <span>Laki-laki</span>
+                            <label class="block text-sm font-medium mb-3"
+                                >Tingkat stres saat ini (1–10)</label
+                            >
+                            <div class="flex items-center gap-4">
+                                <input
+                                    type="range"
+                                    id="stress"
+                                    min="1"
+                                    max="10"
+                                    value="5"
+                                    class="w-full accent-teal-600"
+                                />
+                                <span
+                                    id="stress-value"
+                                    class="font-bold text-2xl text-teal-700 min-w-[2.5rem] text-right"
+                                    >5</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2"
+                                    >Rata-rata tidur per malam</label
+                                >
+                                <select
+                                    id="sleep"
+                                    class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                                >
+                                    <option value="less6">
+                                        Kurang dari 6 jam
+                                    </option>
+                                    <option value="67" selected>6–7 jam</option>
+                                    <option value="78">7–8 jam</option>
+                                    <option value="more8">
+                                        Lebih dari 8 jam
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2"
+                                    >Olahraga per minggu</label
+                                >
+                                <select
+                                    id="exercise"
+                                    class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                                >
+                                    <option value="none">Tidak pernah</option>
+                                    <option value="low">1–2 kali</option>
+                                    <option value="med" selected>
+                                        3–4 kali
+                                    </option>
+                                    <option value="high">
+                                        5 kali atau lebih
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-4"
+                                >Gejala yang Anda rasakan (boleh pilih lebih
+                                dari satu)</label
+                            >
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="fatigue"
+                                        class="accent-teal-600"
+                                    />
+                                    <span>Kelelahan kronis</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="gender" value="female" class="accent-teal-600">
-                                    <span>Perempuan</span>
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="anxiety"
+                                        class="accent-teal-600"
+                                    />
+                                    <span>Kecemasan / mudah marah</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="insomnia"
+                                        class="accent-teal-600"
+                                    />
+                                    <span>Sulit tidur / insomnia</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="weight"
+                                        class="accent-teal-600"
+                                    />
+                                    <span>Penumpukan lemak di perut</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="hypertension"
+                                        class="accent-teal-600"
+                                    />
+                                    <span>Tekanan darah tinggi</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="focus"
+                                        class="accent-teal-600"
+                                    />
+                                    <span
+                                        >Sulit berkonsentrasi / brain fog</span
+                                    >
                                 </label>
                             </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <label class="block text-sm font-medium mb-3">Tingkat stres saat ini (1–10)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="range" id="stress" min="1" max="10" value="5" class="w-full accent-teal-600">
-                            <span id="stress-value" class="font-bold text-2xl text-teal-700 min-w-[2.5rem] text-right">5</span>
-                        </div>
-                    </div>
+                        <button
+                            type="submit"
+                            class="w-full bg-teal-600 hover:bg-teal-700 text-white py-5 rounded-full font-semibold text-lg transition shadow-md hover:shadow-lg"
+                        >
+                            Hitung Estimasi Kadar Kortisol
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Rata-rata tidur per malam</label>
-                            <select id="sleep" class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200">
-                                <option value="less6">Kurang dari 6 jam</option>
-                                <option value="67" selected>6–7 jam</option>
-                                <option value="78">7–8 jam</option>
-                                <option value="more8">Lebih dari 8 jam</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Olahraga per minggu</label>
-                            <select id="exercise" class="w-full px-5 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200">
-                                <option value="none">Tidak pernah</option>
-                                <option value="low">1–2 kali</option>
-                                <option value="med" selected>3–4 kali</option>
-                                <option value="high">5 kali atau lebih</option>
-                            </select>
-                        </div>
+        <!-- Tips -->
+        <section id="tips" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Cara Menjaga Kadar Kortisol Tetap Seimbang
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-3xl text-center">
+                        <div class="text-5xl mb-4">🧘</div>
+                        <h3 class="font-semibold text-xl mb-3">Kelola Stres</h3>
+                        <p class="text-slate-600">
+                            Meditasi 10 menit/hari, pernapasan dalam, atau jalan
+                            kaki ringan dapat menurunkan kortisol secara
+                            signifikan.
+                        </p>
                     </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-4">Gejala yang Anda rasakan (boleh pilih lebih dari satu)</label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="fatigue" class="accent-teal-600">
-                                <span>Kelelahan kronis</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="anxiety" class="accent-teal-600">
-                                <span>Kecemasan / mudah marah</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="insomnia" class="accent-teal-600">
-                                <span>Sulit tidur / insomnia</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="weight" class="accent-teal-600">
-                                <span>Penumpukan lemak di perut</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="hypertension" class="accent-teal-600">
-                                <span>Tekanan darah tinggi</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-4 border border-slate-200 rounded-2xl hover:bg-slate-50 cursor-pointer transition">
-                                <input type="checkbox" name="symptom" value="focus" class="accent-teal-600">
-                                <span>Sulit berkonsentrasi / brain fog</span>
-                            </label>
-                        </div>
+                    <div class="bg-slate-50 p-8 rounded-3xl text-center">
+                        <div class="text-5xl mb-4">🌙</div>
+                        <h3 class="font-semibold text-xl mb-3">
+                            Tidur Berkualitas
+                        </h3>
+                        <p class="text-slate-600">
+                            Usahakan tidur 7–9 jam setiap malam dengan jadwal
+                            yang konsisten.
+                        </p>
                     </div>
+                    <div class="bg-slate-50 p-8 rounded-3xl text-center">
+                        <div class="text-5xl mb-4">🥗</div>
+                        <h3 class="font-semibold text-xl mb-3">
+                            Nutrisi Seimbang
+                        </h3>
+                        <p class="text-slate-600">
+                            Kurangi kafein sore hari, tambah makanan kaya
+                            magnesium, vitamin C, dan omega-3.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <button type="submit"
-                            class="w-full bg-teal-600 hover:bg-teal-700 text-white py-5 rounded-full font-semibold text-lg transition shadow-md hover:shadow-lg">
-                        Hitung Estimasi Kadar Kortisol
+        <!-- Modal Hasil -->
+        <div
+            id="result-modal"
+            class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4"
+        >
+            <div
+                class="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-8 relative"
+            >
+                <button
+                    data-close-modal
+                    class="absolute top-4 right-6 text-3xl text-slate-400 hover:text-slate-600"
+                >
+                    &times;
+                </button>
+
+                <h3 class="text-2xl font-bold text-center mb-6">
+                    Hasil Estimasi
+                </h3>
+
+                <div class="text-center py-6">
+                    <p class="text-slate-600 text-sm mb-2">
+                        Estimasi kadar kortisol Anda
+                    </p>
+                    <div id="result-level" class="text-5xl font-extrabold mb-4">
+                        —
+                    </div>
+                    <p
+                        id="result-explanation"
+                        class="text-slate-700 text-lg font-medium"
+                    ></p>
+                    <p
+                        id="result-score"
+                        class="text-sm text-slate-500 mt-2"
+                    ></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-6 mt-6">
+                    <p class="font-semibold mb-2">Saran:</p>
+                    <p id="result-advice" class="text-slate-700"></p>
+                </div>
+
+                <div class="flex gap-4 mt-8">
+                    <button
+                        data-close-modal
+                        class="flex-1 py-4 border border-slate-300 rounded-full font-medium hover:bg-slate-50 transition"
+                    >
+                        Tutup
                     </button>
-                </form>
+                    <button
+                        onclick="location.reload()"
+                        class="flex-1 py-4 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition"
+                    >
+                        Periksa Ulang
+                    </button>
+                </div>
+
+                <p class="text-xs text-slate-400 text-center mt-8">
+                    *Estimasi ini bersifat edukatif dan bukan pengganti
+                    pemeriksaan medis atau diagnosis dokter.
+                </p>
             </div>
         </div>
-    </section>
 
-    <!-- Tips -->
-    <section id="tips" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Cara Menjaga Kadar Kortisol Tetap Seimbang</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                    <div class="text-5xl mb-4">🧘</div>
-                    <h3 class="font-semibold text-xl mb-3">Kelola Stres</h3>
-                    <p class="text-slate-600">Meditasi 10 menit/hari, pernapasan dalam, atau jalan kaki ringan dapat menurunkan kortisol secara signifikan.</p>
-                </div>
-                <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                    <div class="text-5xl mb-4">🌙</div>
-                    <h3 class="font-semibold text-xl mb-3">Tidur Berkualitas</h3>
-                    <p class="text-slate-600">Usahakan tidur 7–9 jam setiap malam dengan jadwal yang konsisten.</p>
-                </div>
-                <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                    <div class="text-5xl mb-4">🥗</div>
-                    <h3 class="font-semibold text-xl mb-3">Nutrisi Seimbang</h3>
-                    <p class="text-slate-600">Kurangi kafein sore hari, tambah makanan kaya magnesium, vitamin C, dan omega-3.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <footer class="bg-slate-900 text-white py-10 text-center text-sm">
+            <p>© Untuk Tujuan Edukasi Kesehatan</p>
+        </footer>
 
-    <!-- Modal Hasil -->
-    <div id="result-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-8 relative">
-            <button data-close-modal class="absolute top-4 right-6 text-3xl text-slate-400 hover:text-slate-600">&times;</button>
-            
-            <h3 class="text-2xl font-bold text-center mb-6">Hasil Estimasi</h3>
-            
-            <div class="text-center py-6">
-                <p class="text-slate-600 text-sm mb-2">Estimasi kadar kortisol Anda</p>
-                <div id="result-level" class="text-5xl font-extrabold mb-4">—</div>
-                <p id="result-explanation" class="text-slate-700 text-lg font-medium"></p>
-                <p id="result-score" class="text-sm text-slate-500 mt-2"></p>
-            </div>
-
-            <div class="bg-slate-50 rounded-2xl p-6 mt-6">
-                <p class="font-semibold mb-2">Saran:</p>
-                <p id="result-advice" class="text-slate-700"></p>
-            </div>
-
-            <div class="flex gap-4 mt-8">
-                <button data-close-modal class="flex-1 py-4 border border-slate-300 rounded-full font-medium hover:bg-slate-50 transition">
-                    Tutup
-                </button>
-                <button onclick="location.reload()" class="flex-1 py-4 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition">
-                    Periksa Ulang
-                </button>
-            </div>
-
-            <p class="text-xs text-slate-400 text-center mt-8">
-                *Estimasi ini bersifat edukatif dan bukan pengganti pemeriksaan medis atau diagnosis dokter.
-            </p>
-        </div>
-    </div>
-
-    <footer class="bg-slate-900 text-white py-10 text-center text-sm">
-        <p>© Untuk Tujuan Edukasi Kesehatan</p>
-    </footer>
-
-    <script src="src/logic.js"></script>
-</body>
+        <script src="src/logic.js"></script>
+    </body>
 </html>
